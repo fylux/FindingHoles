@@ -1,0 +1,23 @@
+M: matrix[N][N] of integer;
+
+// If there is only one vertex
+if N == 1:
+    return 1 - M[1,1]
+
+A := 1
+B := 2
+while (A <= N && B <= N):
+    if M[A,B] == M[B,A]:
+        A := MAX(A, B) + 1
+        B := A + 1
+    else if M(A, B) == 1:
+        A := MAX(A, B) + 1
+    else:
+        B := MAX(A, B) + 1
+
+// IsHole checks if a given vertex is a hole looking at its row and column O(V)
+// && short-circuits
+if (A <= N && IsHole(M, A)) return A
+if (B <= N && IsHole(M, B)) return B
+
+return 0  // No hole found

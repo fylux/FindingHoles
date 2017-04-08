@@ -1,6 +1,10 @@
-#include "findHole.hpp"
+#ifndef __FIND_HOLE__
+#define __FIND_HOLE__
 
-int isHole(int matrix[5][5], int p) {
+#include <algorithm>
+
+template <size_t rows, size_t cols>
+int isHole(int (&matrix)[rows][cols], int p) {
 	for (int i = 0; i < 5; i++)
 		if (matrix[i][p] == 0 && i != p)
 			return 0;
@@ -12,12 +16,13 @@ int isHole(int matrix[5][5], int p) {
 	return 1;
 }
 
+template <size_t rows, size_t cols>
+int findHole(int (&matrix)[rows][cols], int n) {
+	if ( n <= 1 ) return 0-matrix[0][0];
 
-int findHole(int matrix[5][5], int n) {
-	if ( n <= 1 ) return 0;
-
-	int c1 = 0;
-	int c2 = 1;
+	int c1 = 0; //Hole Candidate 1
+	int c2 = 1; //Hole Candidate 2
+	
 	while (c2 < n && c1 < n) {
 		if ( (matrix[c1][c2] && matrix[c2][c1]) || (!matrix[c1][c2] && !matrix[c2][c1]) ) {
 			c1=std::max(c1,c2)+1;
@@ -39,3 +44,6 @@ int findHole(int matrix[5][5], int n) {
 	return -1;
 }
 
+
+
+#endif
