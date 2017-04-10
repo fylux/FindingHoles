@@ -1,8 +1,8 @@
-a.exe: main.o
-	gcc -o a.exe main.o -lstdc++ -std=c++11
+a.out: main.o
+	g++ -o a.out main.o -std=c++11
 
 main.o : main.cpp findHole.hpp
-	gcc -c main.cpp -lstdc++ -std=c++11
+	g++ -c main.cpp -std=c++11
 
-run: a.exe
-	a.exe
+run : a.out
+	./a.out
